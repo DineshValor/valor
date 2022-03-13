@@ -1,0 +1,68 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.0.0
+
+jobs: 
+  test:
+    parameters:
+      node-version:
+        type: string
+    docker:
+      - image: cimg/node:<< parameters.node-version >>
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-deps-{{ checksum "package.json" }}
+      - run:
+          name: Setting restore cache
+          command: |
+            PACKAGE_LOCK_FILE=./node_modules/package-lock.json
+            if [ -e "$PACKAGE_LOCK_FILE" ]; then 
+              mv $PACKAGE_LOCK_FILE package-lock.json
+            fi
+      - run:
+          name: Install packages
+          command: npm install
+      - run:
+          name: Setting to save cache
+          command: mv package-lock.json ./node_modules/package-lock.json
+      - save_cache:
+          key: v1-deps-{{ checksum "package.json" }}
+          paths: 
+            - node_modules
+            - package-lock.json 
+      - run:
+          name: Run test using nodejs << parameters.node-version >>
+          command: node test.js
+  push:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "5b:27:23:ab:01:73:4e:bb:a1:6f:24:c1:8b:5c:54:5f"
+      - checkout
+      - run: 
+          name: Clone repo
+          command: git clone --mirror https://github.com/DineshValor/valor-game.git
+      - run:
+          name: Change directory & Remote mirror repo & Update repo &
+          command: cd games-wabot.git &&
+                  git remote set-url --push origin https://github.com/DineshValor/games-wabot-md.git && 
+                  git fetch -p origin &&
+                  (git push --mirror || exit 0)
+workflows:
+  all-test:
+    jobs:
+      - test: 
+          matrix:
+            parameters:
+              node-version: ['14.19', '16.14', '17.5']
+  push-to-mirror:
+    jobs:
+      - push:
+          filters:
+            branches:
+              only:
+                - multi-device
+                - main
