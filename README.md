@@ -18,9 +18,9 @@ Based on [`games-wabot`](https://github.com/BochilGaming/games-wabot/tree/multi-
 ## Installation For Heroku User
 
 #### Required Buildpack
+* heroku/nodejs
 * https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest
 * https://github.com/DuckyTeam/heroku-buildpack-imagemagick
-* heroku/nodejs
 
 Note: add above buildpack in sequence and click on save changes respectively.
 
