@@ -73,7 +73,7 @@ ${'' + Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(
 [`      ﹤ᴍᴇɴᴜ      `, `${usedPrefix}menu`],
 [`ᴏᴡɴᴇʀ`, `${usedPrefix}owner`],
 [`ʀᴜʟᴇs`, `${usedPrefix}rules`]
-], m)
+], m, {asLocation: true})
 }
 handler.help = ['info']
 handler.tags = ['info']

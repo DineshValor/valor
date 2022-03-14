@@ -39,7 +39,7 @@ Hi, %name
 *⇓⇓ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ʟɪsᴛᴇᴅ ʙᴇʟᴏᴡ ⇓⇓*
 %readmore`.trimStart(),
   header: '╭─ *〔 %category 〕*',
-  body:   '├  %cmd %islimit %isPremium',
+  body:   '├ %cmd %islimit %isPremium',
   footer: '╰─────˧\n',
   after: `
 *✨ʜᴏᴩᴇ ʏᴏᴜ ᴇɴᴊᴏʏɪɴɢ ᴛʜᴇ ʙᴏᴛ✨*
@@ -133,9 +133,9 @@ let handler = async (m, { conn, usedPrefix: _p, usedPrefix, __dirname }) => {
       readmore: readMore
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
-    const naruto = await './media/naruto.jpg'
+    const menu = './media/menu.jpg'
     const pp = await conn.profilePictureUrl(conn.user.jid).catch(_ => './src/avatar_contact.png')
-    conn.sendHydrated(m.chat, text.trim(), ``, pp, 'https://github.com/DineshValor/valor-game', 'sᴏᴜʀᴄᴇ', null, null, [
+    conn.sendHydrated(m.chat, text.trim(), ``, menu, 'https://github.com/DineshValor/valor-game', 'sᴏᴜʀᴄᴇ', null, null, [
       [`ʙᴏᴛ ɪɴғᴏ`, `${usedPrefix}info`],
       [`ᴩʀᴏғɪʟᴇ`, `${usedPrefix}profile`]
     ], m, {asLocation: true})
@@ -144,9 +144,9 @@ let handler = async (m, { conn, usedPrefix: _p, usedPrefix, __dirname }) => {
     throw e
   }
 }
-handler.help = ['menu / help']
+handler.help = ['menu / help / valor']
 handler.tags = ['main']
-handler.command = /^(menu|help)$/i
+handler.command = /^(menu|help|valor)$/i
 
 handler.exp = 3
 
