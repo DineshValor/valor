@@ -615,10 +615,10 @@ export async function participantsUpdate({ id, participants, action }) {
                         pp = await this.profilePictureUrl(user, 'image')
                     } catch (e) {
                     } finally {
-                        text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc?.toString() || 'unknow') :
+                        text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc?.toString() || 'ɴᴏ ᴅᴇsᴄʀɪᴩᴛɪᴏɴ') :
                             (chat.sBye || this.bye || conn.bye || 'Bye, @user!')).replace('@user', '@' + user.split('@')[0])
                         
-                        this.sendHydrated(id,text, null, pp, null, null, null, null, ['ᴍᴇɴᴜ', '/menu'], null, false, {mentions: [user]})
+                        this.sendHydrated(id,text, null, pp, null, null, null, null, ['ᴍᴇɴᴜ', '/menu'], null, true, {mentions: [user]})
                     }
                 }
             }
