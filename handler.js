@@ -617,8 +617,7 @@ export async function participantsUpdate({ id, participants, action }) {
                     } finally {
                         text = (action === 'add' ? (chat.sWelcome || this.welcome || conn.welcome || 'Welcome, @user!').replace('@subject', await this.getName(id)).replace('@desc', groupMetadata.desc?.toString() || 'ɴᴏ ᴅᴇsᴄʀɪᴩᴛɪᴏɴ') :
                             (chat.sBye || this.bye || conn.bye || 'Bye, @user!')).replace('@user', '@' + user.split('@')[0])
-                        
-                        this.sendHydrated(id,text, null, pp, null, null, null, null, ['ᴍᴇɴᴜ', '/menu'], null, true, {mentions: [user]})
+                        this.sendButton(id, text, null, pp, [[action === 'add' ? 'Welcome' : 'Goodbye', 'TeamMars20']], null, { mentions: [user] })
                     }
                 }
             }
